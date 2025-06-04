@@ -34,3 +34,33 @@ A page on the admin side to see all orders catered to date.
   - `user_name`
   - `password`
   - `user_role` (chef, admin, customer)
+  
+## Functionality to add
+- Admin section 
+  - can view all orders and order details
+  - allow admin to modify all tables
+  - generate bills and add it to customer side 
+  - (does so by changing status of order_id to payment pending)
+  - once client does payment, order is changed to payment done
+- Menu section 
+  - display menu 
+  - show items with picture and price 
+- Customer section 
+  - Show customer orders
+  - Allow placement of new orders
+  - Show order Status
+  - Proceed to payment
+- Order section 
+  - Display Menu 
+  - show items with picture and price
+  - add button to add to order, also add a counter for quantity
+  - place order button
+- Login section 
+  - provide choice, chef or customer
+  - add admin login(admin can login either from chef or customer)
+- Chef section 
+  - can view all orders 
+  - can mark order as completed
+## TODO-list
+- create admin side
+- 
