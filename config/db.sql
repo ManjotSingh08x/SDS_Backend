@@ -17,12 +17,12 @@ CREATE TABLE menu (
  item_name varchar(255) NOT NULL,
  price int NOT NULL,
  image_url varchar(500) NOT NULL,
- PRIMARY KEY (menu_id)
+ PRIMARY KEY (item_id)
 );
 
 CREATE TABLE orders (
  order_id int NOT NULL AUTO_INCREMENT,
- user_id_id int NOT NULL,
+ user_id int NOT NULL,
  table_no int NOT NULL,
  status ENUM('Ongoing', 'Served', 'Payment Pending', 'Complete') NOT NULL,
  custom_inst text DEFAULT NULL,
@@ -41,16 +41,16 @@ CREATE TABLE order_details (
  FOREIGN KEY (item_id) REFERENCES menu(item_id) ON DELETE CASCADE
 );
 
+CREATE TABLE categories (
+    category_id int NOT NULL AUTO_INCREMENT,
+    category_name varchar(255) NOT NULL,
+    PRIMARY KEY (category_id)
+);
+
 CREATE TABLE item_description (
     item_id int NOT NULL,
     category_id int NOT NULL,
     PRIMARY KEY (item_id, category_id),
     FOREIGN KEY (item_id) REFERENCES menu(item_id) ON DELETE CASCADE,
     FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
-)
-
-CREATE TABLE categories (
-    category_id int NOT NULL AUTO_INCREMENT,
-    category_name varchar(255) NOT NULL,
-    PRIMARY KEY (category_id)
-)
+);
