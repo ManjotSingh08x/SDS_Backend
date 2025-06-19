@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS food_system;
 CREATE DATABASE food_system;
 
 USE food_system;
@@ -12,11 +13,19 @@ CREATE TABLE users (
  PRIMARY KEY (user_id)
 );
 
+CREATE TABLE primary_categories (
+    category_id int NOT NULL AUTO_INCREMENT,
+    category_name varchar(255) NOT NULL,
+    PRIMARY KEY (category_id)
+);
+
 CREATE TABLE menu (
  item_id int NOT NULL AUTO_INCREMENT,
  item_name varchar(255) NOT NULL,
  price int NOT NULL,
  image_url varchar(500) NOT NULL,
+ primary_category_id int NOT NULL,
+ FOREIGN KEY (primary_category_id) REFERENCES primary_categories(category_id) ON DELETE CASCADE,
  PRIMARY KEY (item_id)
 );
 
@@ -41,7 +50,7 @@ CREATE TABLE order_details (
  FOREIGN KEY (item_id) REFERENCES menu(item_id) ON DELETE CASCADE
 );
 
-CREATE TABLE categories (
+CREATE TABLE secondary_categories (
     category_id int NOT NULL AUTO_INCREMENT,
     category_name varchar(255) NOT NULL,
     PRIMARY KEY (category_id)
@@ -52,5 +61,8 @@ CREATE TABLE item_description (
     category_id int NOT NULL,
     PRIMARY KEY (item_id, category_id),
     FOREIGN KEY (item_id) REFERENCES menu(item_id) ON DELETE CASCADE,
-    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
+    FOREIGN KEY (category_id) REFERENCES secondary_categories(category_id) ON DELETE CASCADE
 );
+
+-- admin account
+INSERT INTO users (user_name, user_role, password, email, phone) VALUES ('admin', 'Admin',  '$2b$10$08tG4oeQ2nlns47hWdDuiu0t7VRRhHHrWjbrV0iTswrHS6QXOgw3C', 'admin@admin.com', 9876543210);
